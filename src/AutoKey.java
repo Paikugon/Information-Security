@@ -12,7 +12,10 @@ public class AutoKey extends Vingenere {
         String NewKey = key ;
         int n = Plain.length();
         int m = key.length();
-        NewKey += Plain.substring(0, n - m);
+        //we connect plain with key to make a new key keyplain
+        //since key already has m characters, we only need to add (m-n) characters (if m < n, of course)
+        if (m < n)
+            NewKey += Plain.substring(0, n - m);
         return NewKey;
     }
 
