@@ -24,7 +24,6 @@ We'll use that to our advantage
  */
 
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Scanner;
 
 public class Transposition {
@@ -80,9 +79,9 @@ public class Transposition {
         }
         Arrays.sort(tempArr, (a,b) -> a.c - b.c);
 
-        /* the maximum and minimum columns in the table above
+        /* the maximum and minimum number of rows in the table above
         if n is divisible by m then max = min = n/m
-        else the table will have 1 extra column at rows that has index < n % m
+        else the table will have 1 extra rows at columns that has index < n % m
         */
         int maxRow, minRow;
         maxRow = minRow = n / m;
@@ -99,6 +98,8 @@ public class Transposition {
             if (tempArr[i].index < (n % m)){
                 iterate++;
             }
+            /* tempArr[i].index is currently holding the original index of the character in the key
+            * so I'm using it to directly to allocate the characters to the original table */
             for (int j = 0; j < iterate; j++) {
                 temp[tempArr[i].index][j] = encrypted.charAt(cur);
                 cur++;
