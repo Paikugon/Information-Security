@@ -7,7 +7,6 @@ Thanks for reading this and enjoy the rest of your day :)
 
 public class Transposition {
 
-
     public static void main(String[] args) {
 
     }
