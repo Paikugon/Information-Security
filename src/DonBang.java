@@ -45,12 +45,17 @@ public class DonBang {
     public static void main(String[] args) {
         //the key used in this method is 26 letters long, corresponding to 26 letters in the English alphabet
         //'a' will be replaced with the 1st letter in the key, 'b' is 2nd, 'c' is 3rd, etc.
-        String StringKey = "qazwsxedcrfvtgbyhnujmikolp";
+        String StringKey;
+
+        //for testing purposes, here's a sample key where I pressed 26 letters on my keyboard
+        //StringKey = "qazwsxedcrfvtgbyhnujmikolp"
 
         //input
         Scanner scan = new Scanner(System.in);
         System.out.print("Input Plain message: ");
         String Plain = scan.nextLine();
+        System.out.println("Input Key: ");
+        StringKey = scan.nextLine();
       
         //encrypt and decrypt
         String encrypted = encrypt(Plain, StringKey);
