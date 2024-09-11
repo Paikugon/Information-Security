@@ -61,8 +61,7 @@ public class RailFence2 {
                 cur++;
             }
         }
-
-        //process different on the last row
+        //process differently on the last row
         for (int i = key - 1; (i < n) && (cur < n); i += 2*(key - 1)) {
             tempArr[key - 1][i] = encrypted.charAt(cur);
             cur++;
