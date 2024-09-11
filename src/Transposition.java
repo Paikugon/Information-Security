@@ -99,7 +99,7 @@ public class Transposition {
                 iterate++;
             }
             /* tempArr[i].index is currently holding the original index of the character in the key
-            * so I'm using it to directly to allocate the characters to the original table */
+            * so I'm using it to directly allocate the characters to the original table */
             for (int j = 0; j < iterate; j++) {
                 temp[tempArr[i].index][j] = encrypted.charAt(cur);
                 cur++;
