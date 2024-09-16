@@ -86,6 +86,23 @@ public class PlayFair {
         return encrypted;
     }
 
+    static String fix(String decrypted){
+        int n = decrypted.length();
+        String res = "";
+        for (int i = 0; i < n - 2; i += 2){
+            char x = decrypted.charAt(i);
+            char y = decrypted.charAt(i + 1);
+            res += x;
+            if (y != 'x' || x != decrypted.charAt(i + 2))
+                res += y;
+        }
+        res += decrypted.charAt(n - 2);
+        if (decrypted.charAt(n - 1) != 'x'){
+            res += decrypted.charAt(n - 1);
+        }
+        return res;
+    }
+
     static protected String decrypt(String encrypted, String key){
        String decrypted = "";
        int n = encrypted.length();
@@ -94,6 +111,25 @@ public class PlayFair {
        createTable(Arr, key);
        int cur = 0;
 
+       for (int i = 0; i < n; i += 2){
+           String posA = find(Arr, encrypted.charAt(i));
+           String posB = find(Arr, encrypted.charAt(i + 1));
+           char tmpA = Arr[posA.charAt(0) - '0'][posB.charAt(1) - '0'];
+           char tmpB = Arr[posB.charAt(0) - '0'][posA.charAt(1) - '0'];
+           //cung dong
+           if (posA.charAt(0) == posB.charAt(0)) {
+               tmpA = Arr[posA.charAt(0) - '0'][(posA.charAt(1) - '0' - 1 + 5) % 5];
+               tmpB = Arr[posB.charAt(0) - '0'][(posB.charAt(1) - '0' - 1 + 5) % 5];
+           }
+           //cung cot
+           if (posA.charAt(1) == posB.charAt(1)){
+               tmpA = Arr[(posA.charAt(0) - '0' - 1 + 5) % 5][posA.charAt(1) - '0'];
+               tmpB = Arr[(posB.charAt(0) - '0' - 1 + 5) % 5][posB.charAt(1) - '0'];
+           }
+           decrypted += tmpA + "" + tmpB;
+       }
+
+       decrypted = fix(decrypted);
        return decrypted;
     }
 
@@ -106,6 +142,8 @@ public class PlayFair {
         String Key = sc.nextLine();
 
         //output
-        System.out.println(encrypt(Plain, Key));
+        String encrypted = encrypt(Plain, Key);
+        System.out.println(encrypted);
+        System.out.println(decrypt(encrypted, Key));
     }
 }
