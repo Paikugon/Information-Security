@@ -18,6 +18,8 @@ public class Main {
         for (int i = 0; i < n; i++) {
             //i-th character in plain text
             char PlainChar = Plain.charAt(i);
+            if (PlainChar < 'a' || PlainChar > 'z')
+                continue;
 
             //push it up NumKey characters
             PlainChar += NumKey;
@@ -39,6 +41,8 @@ public class Main {
         for (int i = 0; i < n; i++) {
             //i-th character in encrypted text
             char EncryptedChar = Crypted.charAt(i);
+            if (EncryptedChar < 'a' || EncryptedChar > 'z')
+                continue;
 
             //push it down NumKey chatacters
             EncryptedChar -= NumKey;
