@@ -1,6 +1,6 @@
 This is my personal project for "Information Security" subject at university.
 
-This project only focuses on some simple encryption techniques
+This project only focuses on some simple encryption techniques 
 I've only had them process undercase English letters (no spaces, either), so the encryption process will ignore excessive letters. Do keep that in mind when you test them
 
  ## How to use:
