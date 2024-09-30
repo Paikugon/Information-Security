@@ -1,7 +1,8 @@
 This is my personal project for "Information Security" subject at university.
 
 This project only focuses on some simple encryption techniques 
-I've only had them process undercase English letters (no spaces, either), so the encryption process will ignore excessive letters. Do keep that in mind when you test them
+
+I've only had them process undercase English letters, so the processes will ignore other characters. Do keep that in mind when you test them
 
  ## How to use:
 - xxx.java files in src folder contains the encryption and decryption processes
