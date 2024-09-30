@@ -1,73 +1,76 @@
-/*
-This is the code for Rail Fence cipher technique (2.3.1 in the book)
-see more about it here: https://en.wikipedia.org/wiki/Rail_fence_cipher
-the article says that there are three rails in the cipher method, but
-we are taught to use  custom keys in school book, so this program uses custom keys, too
-At uni, we were taught to do as following:
-plain text: abcdef
-rewriting in Rail Fence (with 3 rows):
-a . . d . .
-. b . . e .
-. . c . . f
--> cipher: adbecf
-if you have any questions/suggestions, feel free to contact us about it
-Thanks for reading this, enjoy the rest of your day :)
-*/
-
-import java.util.Scanner;
 
 public class RailFence {
-    protected static String encrypt(String Plain, int NumKey){
-        String Encrypted = "";
-        int n = Plain.length();
-
-        /* the indexes of the numbers on the same row will have the same remainder when modulo NumKey
-        so we iterate each remainders and add corresponding characters to Encrypted string
-         */
-        for (int i = 0; i < NumKey; i++){
-            for (int j = i; j < n; j += NumKey){
-                Encrypted += Plain.charAt(j);
+	protected static String encrypt(String plain, int key){
+        int n = plain.length();
+        if (key == 1 || key >= n)
+        	return plain;
+        String encrypted = "";
+        char [][] tempArr = new char[key][n];
+        int cur = 0;
+        int increment = 1;
+        for (int i = 0; i < key; i++)
+        	for (int j = 0; j < n; j++) {
+        		tempArr[i][j] = '-';
+        	}
+        for (int i = 0; i < n; i++) {
+            tempArr[cur][i] = plain.charAt(i);
+            cur += increment;
+            if (((cur == 0) && (increment == -1)) || ((cur == key - 1) && (increment == 1))) {
+                increment *= -1;
             }
         }
-        return Encrypted;
+        for (int j = 0; j < key; j++){
+            for (int i = 0; i < n; i++) {
+                if (tempArr[j][i] != '-'){
+                    encrypted += tempArr[j][i];
+                }
+            }
+        }
+        return encrypted;
     }
 
-    protected static String decrypt(String Encrypted, int NumKey){
-        String Decrypted = "";
-        int n = Encrypted.length();
-
-        //max colum in the original message table, and cur will keep track of the current character in Encrypted text
-        int maxCol = (int)Math.ceil((float)n / NumKey);
+    protected static String decrypt(String encrypted, int key){
+        int n = encrypted.length();
+        if (key == 1 || key >  n)
+    		return encrypted;
+        String decrypted = "";
+        char [][] tempArr = new char[key][n];
         int cur = 0;
-        char[][] tempArr = new char [NumKey][maxCol];
-        for (int i = 0; i < NumKey; i++){
-            int col = n / NumKey;
-            if (i < (n % NumKey))
-                col++;
-            for (int j = 0; j < col; j++){
-                tempArr[i][j] = Encrypted.charAt(cur);
+        int increment;
+        
+        for (int i = 0; i < key; i++)
+        	for (int j = 0; j < n; j++) {
+        		tempArr[i][j] = '-';
+        	}
+
+        //different process on the 1st row
+        for (int i = 0; i < n; i += 2*(key - 1)) {
+            tempArr[0][i] = encrypted.charAt(cur);
+            cur++;
+        }
+        for (int i = 1; i < key - 1; i++){
+            increment = i;
+            for (int j = i; j < n; j += 2*increment){
+                tempArr[i][j] = encrypted.charAt(cur);
+                increment = key - increment - 1;
                 cur++;
             }
         }
-        for (int j = 0; j < maxCol; j++){
-            for (int i = 0; i < NumKey; i++){
-                if (tempArr[i][j] >= 'a' && tempArr[i][j] <= 'z')
-                    Decrypted += tempArr[i][j];
-            }
+        //process differently on the last row
+        for (int i = key - 1; (i < n) && (cur < n); i += 2*(key - 1)) {
+            tempArr[key - 1][i] = encrypted.charAt(cur);
+            cur++;
         }
-        return Decrypted;
-    }
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Input Plain text: ");
-        String PlainText = sc.nextLine();
-        System.out.print("Input number key: ");
-        int NumKey = sc.nextInt();
-
-        String Encrypted = encrypt(PlainText, NumKey);
-        System.out.println("Encrypted text: " + Encrypted);
-        String decrypted = decrypt(Encrypted, NumKey);
-        System.out.println("Decrypted text: " + decrypted);
+        increment = 1;
+        cur = 0;
+        for (int i = 0; i < n; i++){
+            decrypted += tempArr[cur][i];
+            if (((cur == 0) && (increment == -1)) || ((cur == key - 1) && (increment == 1))) {
+                increment *= -1;
+            }
+            cur += increment;
+        }
+        return decrypted;
     }
 }

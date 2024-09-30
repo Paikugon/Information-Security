@@ -1,14 +1,6 @@
-/*
-This is the code for Playfair cipher technique
-see more here https://en.wikipedia.org/wiki/Playfair_cipher
-if you have any questions/suggestions, feel free to contact us about it
-Thanks for reading this, enjoy the rest of your day :)
-*/
-import java.util.Scanner;
-
-public class PlayFair {
-
-    static protected void createTable(char[][] Arr, String key){
+public class PlayFairCipher {
+	static protected void createTable(char[][] Arr, String key){
+		key = key.toLowerCase();
         boolean[] check = new boolean[26];
         for (int i = 0; i < 25; i++)
             check[i] = false;
@@ -16,6 +8,8 @@ public class PlayFair {
         int cur = 0;
         for (int i = 0; i < n; i++) {
             char c = key.charAt(i);
+            if (c < 'a' || c > 'z')
+            	continue;
             if (!check[c - 'a']){
                 check[c - 'a'] = true;
                 if (c == 'i' || c == 'j')
@@ -31,6 +25,20 @@ public class PlayFair {
             cur++;
         }
     }
+	
+	static protected String returnTable(String key) {
+		String res = "";
+		char [][] Arr = new char[5][5];
+        createTable(Arr, key);
+		
+        for (int i = 0; i < 5; i++) {
+        	for (int j = 0; j < 5; j++) {
+        		res += Arr[i][j] + " ";
+        	}
+        	res += "\n";
+        }
+        return res;
+	}
 
     static protected String find(char[][] Arr, char a){
         for (int i = 0; i < 5; i++){
@@ -46,7 +54,7 @@ public class PlayFair {
         String encrypted = "";
         int n = Plain.length();
 
-        char [][] Arr = new char[26][26];
+        char [][] Arr = new char[5][5];
         createTable(Arr, key);
 
         int cur = 0;
@@ -107,9 +115,8 @@ public class PlayFair {
        String decrypted = "";
        int n = encrypted.length();
 
-       char [][] Arr = new char[26][26];
+       char [][] Arr = new char[5][5];
        createTable(Arr, key);
-       int cur = 0;
 
        for (int i = 0; i < n; i += 2){
            String posA = find(Arr, encrypted.charAt(i));
@@ -131,19 +138,5 @@ public class PlayFair {
 
        decrypted = fix(decrypted);
        return decrypted;
-    }
-
-    public static void main(String[] args) {
-        //input
-        Scanner sc = new Scanner(System.in);
-        System.out.print("input plain message: ");
-        String Plain = sc.nextLine();
-        System.out.print("input key: ");
-        String Key = sc.nextLine();
-
-        //output
-        String encrypted = encrypt(Plain, Key);
-        System.out.println(encrypted);
-        System.out.println(decrypt(encrypted, Key));
     }
 }
