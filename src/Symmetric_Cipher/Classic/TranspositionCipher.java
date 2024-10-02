@@ -1,4 +1,4 @@
-package Symmetric_Cipher;
+package Symmetric_Cipher.Classic;
 
 import java.util.Arrays;
 

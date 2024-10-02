@@ -1,4 +1,4 @@
-package Symmetric_Cipher;
+package Symmetric_Cipher.Classic;
 
 public class RailFence {
 	protected static String encrypt(String plain, int key){
@@ -38,7 +38,7 @@ public class RailFence {
         char [][] tempArr = new char[key][n];
         int cur = 0;
         int increment;
-        
+
         for (int i = 0; i < key; i++)
         	for (int j = 0; j < n; j++) {
         		tempArr[i][j] = '-';

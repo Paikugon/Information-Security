@@ -1,4 +1,4 @@
-package Symmetric_Cipher;
+package Symmetric_Cipher.Classic;
 
 public class PlayFairCipher {
 	static protected void createTable(char[][] Arr, String key){

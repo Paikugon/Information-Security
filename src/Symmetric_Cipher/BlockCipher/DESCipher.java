@@ -1,4 +1,4 @@
-package Asymmetric_Cipher;
+package Symmetric_Cipher.BlockCipher;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;

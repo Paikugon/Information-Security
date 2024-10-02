@@ -1,4 +1,4 @@
-package Symmetric_Cipher;
+package Symmetric_Cipher.Classic;
 
 import javax.swing.*;
 import javax.swing.border.*;
@@ -10,7 +10,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class AutoKeyWindows extends JFrame {
+public class RailFenceWindow extends JFrame {
 	
 	private void saveToFile(String content) {
 		JFileChooser filechooser = new JFileChooser();
@@ -37,7 +37,7 @@ public class AutoKeyWindows extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                	AutoKeyWindows frame = new AutoKeyWindows();
+                    RailFenceWindow frame = new RailFenceWindow();
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -49,7 +49,7 @@ public class AutoKeyWindows extends JFrame {
     /**
      * Create the frame.
      */
-    public AutoKeyWindows() {
+    public RailFenceWindow() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 500, 500);
         contentPane = new JPanel();
@@ -58,10 +58,10 @@ public class AutoKeyWindows extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        JLabel lbl_Caesar = new JLabel("AUTOKEY CIPHER");
+        JLabel lbl_Caesar = new JLabel("RAIL FENCE CIPHER");
         lbl_Caesar.setHorizontalAlignment(SwingConstants.CENTER);
         lbl_Caesar.setFont(new Font("Tahoma", Font.PLAIN, 25));
-        lbl_Caesar.setBounds(10, 11, 466, 53);
+        lbl_Caesar.setBounds(0, 11, 486, 53);
         contentPane.add(lbl_Caesar);
 
         JTextArea txt_Plain = new JTextArea();
@@ -110,16 +110,8 @@ public class AutoKeyWindows extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 try{
                     String plaintext = txt_Plain.getText().toLowerCase();
-                    String key = txt_Key.getText().toLowerCase();
-                    if (key.length() == 0) {
-                    	Integer.parseInt("a");
-                    }
-                    for (int i = 0; i < key.length(); i++) {
-                    	if (key.charAt(i) < 'a' || key.charAt(i) > 'z') {
-                    		Integer.parseInt("a");
-                    	}
-                    }
-                    String ciphered = AutoKeyCipher.encrypt(plaintext, key);
+                    int key = Integer.parseInt(txt_Key.getText());
+                    String ciphered = RailFence.encrypt(plaintext, key);
                     txt_Ciphered.setText(ciphered);
                     JOptionPane.showMessageDialog(null, "Sucesfully Encrypted");
                     saveToFile(ciphered);
@@ -133,17 +125,10 @@ public class AutoKeyWindows extends JFrame {
         btn_Decrypt.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		try{
-                    String enText = txt_Ciphered.getText().toLowerCase();
-                    String key = txt_Key.getText().toLowerCase();
-                    if (key.length() == 0) {
-                    	Integer.parseInt("a");
-                    }
-                    for (int i = 0; i < key.length(); i++) {
-                    	if (key.charAt(i) < 'a' || key.charAt(i) > 'z') {
-                    		Integer.parseInt("a");
-                    	}
-                    }
-                    String deciphered = AutoKeyCipher.decrypt(enText, key);
+                    String enText = txt_Ciphered.getText();
+                    enText.toLowerCase();
+                    int key = Integer.parseInt(txt_Key.getText());
+                    String deciphered = RailFence.decrypt(enText, key);
                     txt_Plain.setText(deciphered);
                     JOptionPane.showMessageDialog(null, "Sucesfully Decrypted");
                 } catch (NumberFormatException error) {

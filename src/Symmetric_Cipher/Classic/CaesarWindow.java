@@ -1,4 +1,4 @@
-package Symmetric_Cipher;
+package Symmetric_Cipher.Classic;
 
 import javax.swing.*;
 import javax.swing.border.*;

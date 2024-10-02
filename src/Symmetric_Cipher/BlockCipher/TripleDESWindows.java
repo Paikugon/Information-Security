@@ -1,19 +1,16 @@
-package Asymmetric_Cipher;
+package Symmetric_Cipher.BlockCipher;
 
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.filechooser.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class TripleDESWindows extends JFrame {
 	
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
     private JPanel contentPane;
 
     /**
@@ -76,7 +73,7 @@ public class TripleDESWindows extends JFrame {
         btn_Decrypt.setBounds(191, 388, 106, 43);
         contentPane.add(btn_Decrypt);
 
-        JButton btn_OpenFile = new JButton("Open Cipheredtext file");
+        JButton btn_OpenFile = new JButton("Open Ciphertext file");
         btn_OpenFile.setBounds(327, 388, 149, 43);
         contentPane.add(btn_OpenFile);
 
@@ -103,7 +100,7 @@ public class TripleDESWindows extends JFrame {
                     String key = txt_Key.getText();
                     String ciphered = TripleDESCipher.encrypt(plaintext, key);
                     txt_Ciphered.setText(ciphered);
-                    JOptionPane.showMessageDialog(null, "Sucesfully Encrypted");
+                    JOptionPane.showMessageDialog(null, "Successfully Encrypted");
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.getLocalizedMessage());
                 }
@@ -118,7 +115,7 @@ public class TripleDESWindows extends JFrame {
                     String key = txt_Key.getText();
                     String ciphered = TripleDESCipher.decrypt(plaintext, key);
                     txt_Plain.setText(ciphered);
-                    JOptionPane.showMessageDialog(null, "Sucesfully Decrypted");
+                    JOptionPane.showMessageDialog(null, "Successfully Decrypted");
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.getLocalizedMessage());
                 } 
@@ -136,7 +133,7 @@ public class TripleDESWindows extends JFrame {
         		int userSelection = fileChooser.showOpenDialog(null);
         		if (userSelection == JFileChooser.APPROVE_OPTION) {
         			try (BufferedReader buffer = new BufferedReader(new FileReader(fileChooser.getSelectedFile()))){
-        				JOptionPane.showMessageDialog(null, "File opened succesfully!");
+        				JOptionPane.showMessageDialog(null, "File opened successfully!");
         				txt_Ciphered.read(buffer, null);
         			} catch (IOException er) {
         				JOptionPane.showMessageDialog(null, "Error opening file: " + er.getMessage());

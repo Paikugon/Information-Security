@@ -1,4 +1,4 @@
-package Symmetric_Cipher;
+package Symmetric_Cipher.Classic;
 
 public class Caesar {
 	protected static String encrypt(String Plain, int NumKey){
