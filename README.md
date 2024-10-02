@@ -1,10 +1,11 @@
 This is my personal project for "Information Security" subject at university.
 
-This project only focuses on some simple encryption techniques
-I've only had them process undercase English letters (no spaces, either), so the encryption process will ignore excessive letters. Do keep that in mind when you test them
+This project only focuses on some simple encryption techniques 
+
+I've only had them process undercase English letters, so the processes will ignore other characters. Do keep that in mind when you test them
 
  ## How to use:
-- xxx.java files in src folder contains the encryption and decryption processes
+- xxx.java files in src folder contains the encryption and decryption processes (there might or might not be some pre/post processing in the functions for action buttons, you should check them just in case, they're on the bottom of the code so you shouldn't have any problem finding them)
 - Run the xxxWindow.java files and you'll be able to use their coresponding cipher technique
 
 If you have any questions/suggestions, feel free to contact me with informations in my profile, or with Discord username "paikugon"
